@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- <link rel="stylesheet" href="spinwheel.css"> -->
+    
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap');
+    body{
+        height: 300rem;
+        background-color: #dfb8a2;
+        font-family: "Protest Riot", sans-serif;
+        
+    }
+    :root{
+        --orange:#ffa500
+    }
+    *{
+        font-family: "Protest Riot", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-transform: capitalize;
+        outline: none; border: none;
+        text-decoration: none;
+        transition: all .2s linear;
+    }
+    select
+    {
+        border: 2px;
+        border-radius: 5px;
+        height: 30px;
+        color: black;
+        background-color: white;
+    }
+    .login-btn
+    {
+        height: 30px;
+        width: 60px;
+        border-radius: 5px;
+        font-size: 17px;
+        cursor: pointer;
+        background:none;
+    }
+    *::selection{
+        background: var(--orange);
+        color: #fff;
+
+    }
+    html{
+        font-size: 62.5%;
+        overflow-x:hidden;
+        scroll-padding-top: 6rem;
+        scroll-behavior: smooth;
+    }
+    .btn{
+        display: inline-block;
+        margin-top: 1rem;
+        background: var(--orange);
+        color: #fff;
+        padding: 8rem 3 rem;
+        border: 2rem solid var(--orange);
+        cursor: pointer;
+        font-size: 1.7rem;
+        border-radius: 5px;
+    }
+    .btn:hover{
+        transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+      color: rgb(52, 50, 50);
+    }
+    header{
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        background-image: linear-gradient(to right bottom, #ffd6cd, #f1baac, #e19f8c, #d0856c, #be6b4d, #bd6546, #bb5e3f, #ba5838, #cb6347, #dd6d57, #ee7967, #ff8478);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 9%;
+    }
+    header .logo{
+        font-size: 2.5rem;
+        font-weight: bolder;
+        color: #fff;
+        text-transform: uppercase;
+
+    }
+    header .logo span{
+          color: var(--orange);
+    }
+    header .navbar a{
+        color: #fff;
+        font-size: 2rem;
+        margin: 0.8rem;
+    }
+    header .navbar a:hover{
+        color: var(--orange);
+    }
+    header .icons i{
+        font-size: 2.5rem;
+        color:#fff;
+        cursor: pointer;
+        margin-right: 2rem;
+    }
+    header .icons i:hover{
+        color: var(--orange);
+    }
+    header .search-bar-container{
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        padding: 1.5rem 2rem;
+        background: #333;
+        border-top: .1rem solid rgba(255, 255, 255, .2);
+        display: flex;
+        align-items: center;
+        z-index: 1001;
+        clip-path:polygon(0 0,100% 0,100% 0, 0 0) ;
+    }
+    header .search-bar-container #search-bar{
+        width: 100%;
+        padding: 1rem;
+        text-transform: none;
+        color: #333;
+        font-size: 1.7rem;
+        border-radius: .5rem;
+    }
+    header .search-bar-container label{
+        color: #fff;
+        cursor: pointer;
+        font-size: 3rem;
+        margin-left: 1.5rem;
+    }
+    header .search-bar-container label:hover{
+        color:var(--orange) ;
+    }
+    .login-form-container{
+        position: fixed;
+        top: -120%; left:0;
+        z-index: 10000;
+        min-height: 100vh;
+        width: 100%;
+        background: rgba(0,0 , 0, .7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .login-form-container form{
+        margin: 2rem;
+        padding: 1.5rem 2rem;
+        border-radius: .5rem;
+        background:#fff ;
+        width: 50rem;
+    }
+    .login-form-container form h3{
+        font-size: 3rem;
+        color: #444;
+        text-transform:uppercase ;
+        text-align: center;
+        padding: 1rem 0;
+
+    }
+    .login-form-container form .box{
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.7rem;
+        color: #333;
+        margin: 6rem 0;
+        border: 1rem solid rgba(0,0 , 0, .3);
+        text-decoration: none;
+    }
+    .login-form-container form .box:focus{
+        border-color: var(--orange);
+    }
+    .login-form-container form #remember{
+        margin: 2rem 0;
+    }
+    .login-form-container form label{
+        font-size: 1.5rem;
+    }
+    .login-form-container form.btn{
+        display: block;
+        width:100% ;
+    }
+    .login-form-container form p{
+        padding: 5rem 0;
+        font-size: 1.5rem;
+        
+    }
+    .login-form-container form p a{
+        color: var(--orange);
+    }
+    .login-form-container form p a:hover{
+        
+        text-decoration: underline;
+    }
+    .login-form-container #form-close{
+        position: absolute;
+        top: 2rem; right: 3rem;
+    }
+    .login-form-container.active{
+        top: 0;
+    }
+
+#menu-bar{
+    color: #fff;
+    border: 1rem solid #fff;
+    border-radius: .5rem;
+    font-size: 3rem;
+    padding: 5rem 1.2rem;
+    cursor: pointer;
+    display: none;
+   
+}
+nav
+{
+    display: flex;
+    column-gap: 20px;
+}
+
+/* media queries */
+@media(max-width:1200px){
+    html{
+        font-size: 55%;
+    
+    }
+}
+@media(max-width:991px){
+   header{
+    padding:2rem ;
+   }
+}
+@media(max-width:768px){
+   #menu-bar{
+    display:initial ;
+   }
+   header .navbar{
+    position: absolute;
+    top:100%; right: 0; left: 0;
+    background: #333;
+    border-top: .1rem solid rgba(255, 255, 255, .2);
+    padding: 1rem 2rem;
+    clip-path: polygon(0 0,100% 0,0 0);
+   }
+   header .navbar.active{
+    clip-path: polygon(0 0,100% 0,0 0);
+   }
+
+   header .navbar a{
+   display: block;
+   border-radius: 5rem;
+   padding-left: 1.5rem;
+   margin: 1.5rem 0;
+   background: #222;
+
+}
+}
+@media(max-width:450px){
+    html{
+        font-size: 50%;
+    
+    }
+}
+.home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+    flex-flow: column;
+    position: relative;
+    z-index: 0;
+}
+section{
+    padding: 5rem;
+}
+.home .content{
+    text-align:center;
+    z-index: 1000;
+}
+.home .content h3{
+   font-size: 4.5rem;
+   color: #fff;
+   text-transform: uppercase;
+   text-shadow: 0 .3rem .5rem rgba(0,0,0,.1);
+}
+
+.home .content p{
+   font-size: 2.5rem;
+   color: #fff;
+   padding: 5rem 0;
+}
+.home .video-container video{
+    position: absolute;
+    top:0 ; left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.home .controls {
+    padding: 1rem;
+    border-radius: 5rem;
+    background-color: rgba(0,0,0,.7);
+    position: relative;
+    top: 10rem;
+}
+
+.home .controls .vid-btn{
+    height: 2rem;
+    width: 2rem;
+    display: inline-block;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    margin: 0 .5rem;
+}
+.home .controls .vid-btn.active{
+    background: var(--orange);
+}
+#navid
+   {
+    font-family: "Protest Riot", sans-serif;
+    background-color:rgba(2, 2, 42, 0.377);
+    padding: 10px;
+   }
+
+#logo
+{
+  font-size: large;
+  text-decoration: none;
+}
+#Search
+{
+  border-radius: 10px;
+  width: 20em;
+  height: 40px;
+  color: black;
+  text-align: center;
+  
+}
+#login
+{
+  width: 5em;
+  height: 40px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.navigation
+{
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.logo
+{
+  font-size: xx-large;
+  cursor: pointer;
+  font-family: "Protest Riot", sans-serif;
+  
+
+}
+h2{
+  font-family: "Protest Riot", sans-serif;
+  text-align: center;
+}
+
+.search
+{
+  border-radius: 10px ;
+  background-color:  black;
+  box-shadow: 1px 1px 1px 1px rgb(45, 44, 44);
+  border: 1px solid black;
+  width: 30vw;
+  color: white;
+  font-family: "Protest Riot", sans-serif;
+  text-align: center;
+}
+.login
+{
+  border-radius: 20px;
+  width: 10vw;
+  font-size: large;
+  font-weight: 600;
+  background-color:  black;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgb(45, 44, 44);
+  border: 1px solid black;
+  font-family: "Protest Riot", sans-serif;
+
+}
+.login:hover , .search:hover{
+  transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+}
+.main-content
+{
+  position: relative; /* Change to relative */
+  z-index: 100;
+}
+
+.quiz
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.heading
+{
+   font-size: 18px;
+  font-family: "Protest Riot", sans-serif;
+}
+
+.img1:hover{
+  transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+ 
+}
+
+.img1 {
+ 
+  overflow: hidden;
+  position: relative; 
+}
+
+.img1:hover .hidden-text {
+  display: block;
+}
+
+.hidden-text {
+  display: none;
+  position: absolute; /* Position it relative to its parent */
+  bottom: 0; /* Adjust the positioning */
+  left: 0; /* Adjust the positioning */
+  width: 100%; /* Adjust the width */
+  background-color: rgba(0, 0, 0, 0.7); /* Add a background color */
+  color: white; /* Set text color */
+  padding: 10px; /* Add padding */
+  text-align: center; /* Center the text */
+}
+.hidden-text:hover{
+  text-decoration: underline;
+}
+.img1 img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+/* .active
+{
+  background-color: rgba(2, 2, 42, 0.377);
+} */
+.last
+{
+  font-family: "Protest Riot", sans-serif;
+  background-color: none;
+}
+.brand-list {
+  overflow: hidden;
+}
+.main-heading
+{
+    font-size:45px;
+    text-align: center;
+    color: rgb(94, 42, 5);
+}
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 15rem;
+  justify-items: stretch;
+  animation: scroll 10s linear infinite;
+  column-gap: 20px; /* Adjust this value to add space between images */
+}
+.active
+{
+  color:rgb(55, 49, 49);
+}
+.video
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* z-index: -1; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video-container::before
+{ 
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(134, 114, 114, 0.3);
+
+}
+
+a
+{
+    color: white;
+    cursor: pointer;
+}
+   
+.footer {
+      color: #fff;
+      padding: 50px 0;
+      text-align: center;
+      font-size: 18px;
+      background-image: linear-gradient(to right bottom, #ffd6cd, #f1baac, #e19f8c, #d0856c, #be6b4d, #bd6546, #bb5e3f, #ba5838, #cb6347, #dd6d57, #ee7967, #ff8478);
+    }
+    
+.footer p {
+      margin: 0;
+      line-height: 1.6;
+    }
+    
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer a:hover {
+        color:rgb(94, 42, 5);
+    }
+    
+    .footer .footer-links {
+        background: none;
+      margin-top: 20px;
+    }
+    
+    .footer .footer-links a {
+      margin: 0 10px;
+    }
+    
+    .footer .social-icons {
+      margin-top: 20px;
+    }
+    
+    .footer .social-icons a {
+      display: inline-block;
+      margin: 0 10px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      background: none;
+      color: #fff;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+    
+    .footer .social-icons a:hover {
+      background-color:rgb(94, 42, 5);
+    }
+    #navid
+   {
+    font-family: "Protest Riot", sans-serif;
+    background-color:rgba(2, 2, 42, 0.377);
+    padding: 10px;
+   }
+   .slider{
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    font-size: 16px;
+}
+.item{
+    position: absolute;
+    width: 250px;
+    height: 360px;
+    text-align: justify;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    transition: 0.5s;
+    left: calc(50% - 110px);
+    top: 0;
+    color: rgb(94, 42, 5) ;
+}
+#next, #prev{
+    position: absolute;
+    top: 40%;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    font-size: xxx-large;
+    font-family: monospace;
+    font-weight: bold;
+    left: 400px;
+}
+#next{
+    left: unset;
+    right: 400px;
+}
+
+#logo
+{
+  font-size: large;;
+}
+#Search
+{
+  border-radius: 10px;
+  width: 20em;
+  height: 40px;
+  color: black;
+  text-align: center;
+  
+}
+#login
+{
+  width: 5em;
+  height: 40px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.navigation
+{
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.logo
+{
+  font-size: xx-large;
+  cursor: pointer;
+  font-family: "Protest Riot", sans-serif;
+
+}
+
+.search
+{
+  border-radius: 10px ;
+  background-color:  black;
+  box-shadow: 1px 1px 1px 1px rgb(45, 44, 44);
+  border: 1px solid black;
+  width: 30vw;
+  color: white;
+  font-family: "Protest Riot", sans-serif;
+  text-align: center;
+}
+.login
+{
+  border-radius: 20px;
+  width: 10vw;
+  font-size: large;
+  font-weight: 600;
+  background-color:  black;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgb(45, 44, 44);
+  border: 1px solid black;
+  font-family: "Protest Riot", sans-serif;
+
+}
+.login:hover , .search:hover{
+  transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+}
+.hero
+{
+    
+    overflow: hidden;
+    padding-top: 70px ;
+}
+.heading h1{
+    color: rgb(94, 42, 5);
+    font-size: 55px;
+    text-align: center;
+    margin-top: 35px;
+    font-family: "Protest Riot", sans-serif;
+}
+.container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    /* margin: 65px auto; */
+
+}
+.hero-content
+{
+    flex: 1;
+    width: 600px;
+    margin: 0px 25px;
+    animation: fadeInUp 2s ease;
+    font-family: "Protest Riot", sans-serif;
+
+}
+.hero-image
+{
+    flex: 1;
+    /* width: 100px; */
+    margin: auto;
+    animation: fadeInRight 2s ease;
+    overflow: hidden;
+    
+}
+.hero-content h2{
+    font-size: 38px;
+    /* margin-bottom: 20px; */
+    color: rgb(113, 44, 4);
+}
+.hero-content p{
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 40px;
+    color: white;
+}
+.hero-content button{
+    display: inline-block;
+    background-color: rgb(94, 42, 5);
+    
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.hero-content button:hover{
+    background-color: rgb(167, 83, 23);
+    transform: scale(1.1);
+
+}
+@media screen and (max-width: 768px)
+{
+    .heading h1{
+        font-size: 45px;
+        
+    }
+    .hero{
+        margin: 0px;
+    }
+    .container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+        padding: 0px 40px;
+
+    }
+    .hero-content{
+        width: 100%;
+        margin: 35px 0px;
+    }
+    .hero-content h2{
+        font-size: 30px;
+    }
+    .hero-content p{
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .hero-content button{
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+    .hero-image{
+        width: 100%;
+    }
+}
+img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+
+}
+
+.main-content
+{
+  position: relative; /* Change to relative */
+  z-index: 100;
+}
+.quizzes1
+{
+  display: flex;
+  justify-content: space-between;
+  
+  column-gap: 20px;
+}
+.heading
+{
+  font-family: "Protest Riot", sans-serif;
+}
+
+.img1:hover{
+  transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+ 
+}
+
+.img1 {
+  width: 250px;
+  height: 150px;
+  overflow: hidden;
+  position: relative; 
+}
+
+.img1:hover .hidden-text {
+  display: block;
+}
+
+.hidden-text {
+  display: none;
+  position: absolute; /* Position it relative to its parent */
+  bottom: 0; /* Adjust the positioning */
+  left: 0; /* Adjust the positioning */
+  width: 100%; /* Adjust the width */
+  background-color: rgba(0, 0, 0, 0.7); /* Add a background color */
+  color: white; /* Set text color */
+  padding: 10px; /* Add padding */
+  text-align: center; /* Center the text */
+}
+.img1 img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@keyframes fadeInUp 
+{
+    0%
+    {
+        opacity: 0;
+        transform: translateY(50px) ;
+    }
+    100%
+    {
+        opacity: 1;
+        transform: translateY(0px) ;
+    }
+    
+}
+@keyframes fadeInRight
+{
+    0%
+    {
+        opacity: 0;
+        transform: translateX(-50px) ;
+    }
+    100%
+    {
+        opacity: 1;
+        transform: translateX(0px) ;
+    }
+    
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-7 * (15rem + 120px))); /* Taking into account the space between images */
+  }
+}
+.brand-list {
+  overflow: hidden;
+}
+
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 15rem;
+  justify-items: stretch;
+  animation: scroll 16s linear infinite;
+  column-gap: 120px; /* Adjust this value to add space between images */
+}
+.spinner
+{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.Contact
+{
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  align-items: center;
+  justify-content: center;
+  }
+
+  .c1:hover{
+    color: #ba5838;
+    transform: scale(1.5);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  option:hover
+  {
+    background-color:#ba5838 ;
+  }
+  
+</style>
+<body>
+    <!-- <input type="checkbox" id="check" style="position: absolute; top: -9999px;">
+  <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+  </label>
+
+
+<nav id="mainNav" class="css-14xluik">
+  <div id="sidebarContainer" class="css-193h4u5">
+    <a href="Home.html" aria-label="Home"></a>
+  </div>
+</nav>
+
+<div class="sidebar">
+  <header style="font-family: Protest Riot, sans-serif; font-size: x-large; "><a href="home.html" class="text-light">Trivia Games</a></header>
+  <ul>
+    <li ><a href="#Home" style="color: white;"  ><i class="fa-solid fa-house "></i>Home</a></li>
+    <li><a href="trending now.html" style="color: white;"><i class="fa-solid fa-fire"></i>Trending Now</a></li>
+    <li><a href="#quizzez" style="color: white;"><i class="fa-solid fa-question"></i>Quizzes</a></li>
+    <li><a href="#games" style="color: white;"><i class="fa-brands fa-fantasy-flight-games"></i>Games</a></li>
+    <li><a href="new.html" style="color: white;" ><i class="fa-solid fa-wand-sparkles"></i>New</a></li>
+    <li><a href="tags.html"  style="color: white;"><i class="fa-solid fa-tags"></i>Tags</a></li>
+    <li><a href="#about-us"  style="color: white;"><i class="fa-solid fa-address-card"></i>About Us</a></li>
+  </ul>
+</div> -->
+
+    <!-- header section -->
+    <header>
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <a href="#" class="logo">Trivia Game</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <nav class="navbar" >
+            <a href="#home">Home</a>
+            <a href="#quizzez">Quizzes</a>
+            <a href="#games">Games</a>
+            <a href="#trending">Trending</a>
+            <a href="spinwheel.html">Play Random</a>
+            <a href="#about-us">About Us</a>
+
+            <button class="login-btn" style="margin-top: 5px;"><a href="login.html">Login</a></button>
+
+            <select id="Search" class="search" style="color: white; background-color: rgb(113, 44, 4);" onchange="navigate()" >
+              <option value="Home.html">Home</option>
+              <option value="suduko.html">Suduko</option>
+              <option value="blockchain.html">Blockchain</option>
+              <option value="guess the word.html">Guess the Word</option>
+              <option value="cloud.html">Cloud Computing</option>
+              <option value="tictactoe.html">Tic Tac Toe</option>
+              <option value="Java.html">Java</option>
+              <!-- Add more options as needed -->
+          </select>
+            
+        </nav>
+        
+    </header>
+
+
+    <!-- home section starts -->
+    
+    <section class="home" id="home">
+        <div class="content">
+            <h3>explore your potential!</h3>
+            <p>discover new games with us, Let the fun begin!!</p>
+            <a href="#quizzez" class="btn"> Lets play!!!</a>
+        </div>
+
+       
+
+        <div class="video-container">
+            <video src="boy_-_57753 (1080p).mp4" id="video-slider" loop autoplay muted></video>
+        </div>
+    </section>
+    <br><br><br><br><br>
+    <section>
+        <div class="bubbles">
+            <span style="--i:11"></span>
+            <span style="--i:12"></span>
+            <span style="--i:24"></span>
+            <span style="--i:10"></span>
+            <span style="--i:14"></span>
+            <span style="--i:23"></span>
+            <span style="--i:18"></span>
+            <span style="--i:16"></span>
+            <span style="--i:19"></span>
+            <span style="--i:20"></span>
+            <span style="--i:22"></span>
+            <span style="--i:25"></span>
+            <span style="--i:18"></span>
+            <span style="--i:21"></span>
+            <span style="--i:15"></span>
+            <span style="--i:13"></span>
+            <span style="--i:26"></span>
+            <span style="--i:17"></span>
+            <span style="--i:13"></span>
+            <span style="--i:28"></span>
+            <span style="--i:28"></span>
+            <span style="--i:1"></span>
+            <span style="--i:2"></span>
+            <span style="--i:4"></span>
+            <span style="--i:3"></span>
+            <span style="--i:5"></span>
+            <span style="--i:6"></span>
+            <span style="--i:7"></span>
+            <span style="--i:8"></span>
+            <span style="--i:9"></span>
+            <span style="--i:10"></span>
+            <span style="--i:1"></span>
+            <span style="--i:2"></span>
+            <span style="--i:4"></span>
+            <span style="--i:3"></span>
+            <span style="--i:5"></span>
+            <span style="--i:6"></span>
+            <span style="--i:7"></span>
+            <span style="--i:8"></span>
+            <span style="--i:9"></span>
+            <span style="--i:10"></span>
+            <span style="--i:1"></span>
+            <span style="--i:2"></span>
+            <span style="--i:4"></span>
+            <span style="--i:3"></span>
+            <span style="--i:5"></span>
+            <span style="--i:6"></span>
+            <span style="--i:7"></span>
+            <span style="--i:8"></span>
+            <span style="--i:9"></span>
+            <span style="--i:10"></span>
+            <span style="--i:22"></span>
+            <span style="--i:25"></span>
+            <span style="--i:18"></span>
+            <span style="--i:21"></span>
+            <span style="--i:15"></span>
+            <span style="--i:13"></span>
+            <span style="--i:26"></span>
+            <span style="--i:17"></span>
+            <span style="--i:13"></span>
+            <span style="--i:28"></span>
+            <span style="--i:12"></span>
+            <span style="--i:11"></span>
+            <span style="--i:12"></span>
+            <span style="--i:24"></span>
+            <span style="--i:10"></span>
+            <span style="--i:14"></span>
+            <span style="--i:23"></span>
+            <span style="--i:18"></span>
+            <span style="--i:16"></span>
+            <span style="--i:19"></span>
+            <span style="--i:20"></span>
+            <span style="--i:22"></span>
+            <span style="--i:25"></span>
+            <span style="--i:18"></span>
+            <span style="--i:21"></span>
+            <span style="--i:15"></span>
+            <span style="--i:13"></span>
+            <span style="--i:26"></span>
+            <span style="--i:17"></span>
+            <span style="--i:13"></span>
+            <span style="--i:28"></span>
+            <span style="--i:12"></span>
+            <span style="--i:11"></span>
+            <span style="--i:12"></span>
+            
+            
+          </div>
+    
+    <div class="quiz" id="quizzez">
+    <h1 class="main-heading">Quizzes</h1>
+        <br><br>
+        <div class="quizzes1" id="one">
+          
+            <div class="img1" style="width: 300px; height: 200px;">
+              <a href="java.html"  style="text-decoration: none;"> <img src="https://tse1.mm.bing.net/th?id=OIP.JzWcZrQORKPv4TLGS0jRcwHaEo&pid=Api&P=0&h=180" alt=""><p class="hidden-text heading">Java</p></a>
+          </div>
+          
+          
+          <div class="img1" style="width: 300px; height: 200px;">
+            <a href="webd.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.WXOyi2RkWruFvwKiO-y6ewHaEK&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+            <p class="hidden-text heading web">Web Development</p></a>
+        </div>
+          
+        
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="books and authors.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse2.mm.bing.net/th?id=OIP.OQsbfHJlxSErtZCMgNW5CAHaDr&pid=Api&P=0&h=180" alt="" width="279px" height="175px">
+            <p class="hidden-text heading">Books and authors</p></a>
+        
+        </div>
+            
+          
+      </div>
+      <br><br>
+      <div class="quizzes1  " id="one">
+       
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="operating system.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse2.mm.bing.net/th?id=OIP.6ynvkt-d5QKz5_n5grfHEAHaEK&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+            <p class="hidden-text heading">Operating System</p></a>
+        </div>
+        
+          
+
+       
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="world geography.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse4.mm.bing.net/th?id=OIP.thaaLq8_A7B22rJg3LsJJQHaEo&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+            <p class="hidden-text heading">World Geography</p></a> 
+        
+        </div>
+        
+          
+        
+        
+          <div class="img1" style="width: 300px; height: 200px;">
+            <a href="cybersecurity.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.Va9MJOPkh9gPLqg_8bBO-gHaEK&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+            <p class="hidden-text heading">CyberSecurity</p></a>
+        
+        </div>
+    </div>
+    <br><br>
+    <div class="quizzes1  " id="one">
+      
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="blockchain.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.lOCDkgDsoyZJqTXg13qcQwHaEK&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+          <p class="hidden-text heading">Blockchain</p></a>
+      
+      </div>
+      <div class="img1" style="width: 300px; height: 200px;">
+        <a href="world culture.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse4.mm.bing.net/th?id=OIP.i0HVbZTtCRHtMIq-s4RTMQAAAA&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+        <p class="hidden-text heading">World Culture</p></a>
+    </div>
+      
+      
+      
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="dbms.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse2.mm.bing.net/th?id=OIP.XBYaYFzfNMJpYWYWOB_WhwHaDZ&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+          <p class="hidden-text heading">Database Management</p></a>
+      </div>
+      
+  </div>
+    <br><br>
+    <div class="quizzes1  " id="one">
+          
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="sports.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse2.mm.bing.net/th?id=OIP.UqVgdsG_cfxEfKcJHIA9-wAAAA&pid=Api&P=0&h=180" alt="">
+          <p class="hidden-text heading">Sports</p></a>
+      </div>
+      
+      
+      
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="indian politics.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.g_A9LO2n04wF3DGvDbg7vwHaEK&pid=Api&P=0&h=180" alt="" width="279px" height="175px">
+          <p class="hidden-text heading">Indian Politics</p></a>
+      </div>
+      <div class="img1" style="width: 300px; height: 200px;">
+        <a href="python.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse1.mm.bing.net/th?id=OIP.O3GE4EW38wEOZjFE2NFNewHaEo&pid=Api&P=0&h=180" alt="" width="279px" height="175px">
+        <p class="hidden-text heading">Python</p></a>
+    </div>
+      
+  </div>
+  <br><br>
+  <div class="quizzes1  " id="one">
+   
+      
+    
+    <div class="img1" style="width: 300px; height: 200px;">
+      <a href="cloud.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse1.mm.bing.net/th?id=OIP.fwy3KYh3p5YExxkYdLtgtAHaEu&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+        <p class="hidden-text heading">Cloud Computing</p></a>
+    
+    </div>
+
+    <div class="img1" style="width: 300px; height: 200px;">
+      <a href="famous personalitits.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse2.mm.bing.net/th?id=OIP.YBYRcEn8tAxO4TJO-d53kQHaFj&pid=Api&P=0&h=180"alt="" width="100%" height="100%">
+      <p class="hidden-text heading">Famous Personalities</p></a> 
+  
+  </div>
+  <div class="img1" style="width: 300px; height: 200px;">
+    <a href="cpp.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.fTkiguzGB1HdORxWwZDOvQHaEK&pid=Api&P=0&h=180" alt="" width="279px" height="175px">
+    <p class="hidden-text heading">C / C++</p></a>
+
+</div>
+</div>
+<br><br>
+</div>
+<br><br><br><br><br>
+    <div class="quiz" id="games">
+    <h1 class="main-heading ">Games</h1>
+        <br><br>
+        <div class="quizzes1" id="one">
+          
+            <div class="img1" style="width: 300px; height: 200px;">
+              <a href="suduko.html"  style="text-decoration: none;"><img src="https://tse1.mm.bing.net/th?id=OIP.zWGru9Mrq6KM0KpGZGb70QHaEo&pid=Api&P=0&h=180" alt="">
+              <p class="hidden-text heading">Suduko</p></a>
+          </div>
+          
+          
+            <div class="img1" style="width: 300px; height: 200px;">
+              <a href="https://www.crazygames.com/game/find-the-difference" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.vWxYQ2Wn4XOrCenEqSI14wHaDt&pid=Api&P=0&h=180" alt="" width="279px" height="175px">
+              <p class="hidden-text heading">Find the Difference</p></a>
+          
+          </div>
+          
+            <div class="img1" style="width: 300px; height: 200px;">
+              <a href="guess the word.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse1.mm.bing.net/th?id=OIP.fN82nW6z_q5xj_hL7Z8rPAHaEo&pid=Api&P=0&h=180" alt="" width="279px" height="175px">
+              <p class="hidden-text heading">Guess the Word</p></a>
+          </div>
+          
+      </div>
+      <br><br>
+      <div class="quizzes1 d-flex justify-content-around " id="one">
+       
+          <div class="img1" style="width: 300px; height: 200px;">
+            <a href="https://www.chess.com/play/online" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse1.mm.bing.net/th?id=OIP.c5zCRSTyV656a_2c59jcHwHaEo&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+            <p class="hidden-text heading">Chess</p></a>
+        
+        </div>
+        
+          <div class="img1" style="width: 300px; height: 200px;">
+            <a href="tictactoe.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.9WCM5hW9KQCWMbGFKIdA5wHaHa&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+            <p class="hidden-text heading web">Tic Tac Toe</p></a>
+        </div>
+        
+        
+          <div class="img1" style="width: 300px; height: 200px;">
+            <a href="https://www.gamesgames.com/game/mahjong-link" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse4.mm.bing.net/th?id=OIP.yctoH6HIY2OuR2JT3PhTAgHaEo&pid=Api&P=0&h=180 " alt="" width="100%" height="100%">
+            <p class="hidden-text heading">Solve the Puzzle</p></a>
+        
+        </div>
+    </div>
+    <br><br>
+    <div class="quizzes1 d-flex justify-content-around " id="one">
+      
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="https://poki.com/en/g/nonogram" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse4.mm.bing.net/th?id=OIP.6qK8ORb3J8QNWyHB5SA-pgHaEK&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+          <p class="hidden-text heading">Nonogram</p></a>
+      
+      </div>
+      
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="https://poki.com/en/g/subway-surfers" class="text-light" style="text-decoration: none;"> <img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.W3bj6HGtO0WsKOkDbKQk-QAAAA&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+          <p class="hidden-text heading">Subway Surfers</p></a>
+      </div>
+      
+      
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="https://gameforge.com/en-US/littlegames/hill-climb-racing-2/#" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse2.mm.bing.net/th?id=OIP.EydLrTAKJo5v-t_HCfEqYwHaEL&pid=Api&P=0&h=180" alt="" width="100%" height="100%">
+          <p class="hidden-text heading">Hill Climbing Racing</p></a>
+      </div>
+      
+  </div>
+    <br><br>
+    <div class="quizzes1 d-flex justify-content-around " id="one">
+          
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="stonepaperscissors.html" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse1.mm.bing.net/th?id=OIP.670uZicBCKiByjsnCm88ewHaFj&pid=Api&P=0&h=180" alt="">
+          <p class="hidden-text heading">Stone Paper Scissors</p></a>
+      </div>
+      
+      
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="https://games4esl.com/fun-emoji-quiz/" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse3.mm.bing.net/th?id=OIP.ErqEequ_e_N1_gXin6F-0QHaEK&pid=Api&P=0&h=180" alt="" width="279px" height="175px">
+          <p class="hidden-text heading">Guess the word using Emoji</p></a>
+      
+      </div>
+      
+        <div class="img1" style="width: 300px; height: 200px;">
+          <a href="https://wordwall.net/resource/24827/geography/guess-the-country-from-the-photo" class="text-light" style="text-decoration: none;"><img class="img-fluid rounded shadow-lg "src="https://tse2.mm.bing.net/th?id=OIP.pAXGUz1Qag6dSw-hhVm8pQHaEo&pid=Api&P=0&h=180" alt="" width="279px" height="175px">
+          <p class="hidden-text heading">Guess the Picture</p></a>
+      </div>
+      
+  </div>
+  <br><br>
+
+  </div>
+
+<br><br><br><br><br>
+  
+    <h1 class="main-heading" id="trending">Trending Now!</h1>
+    <br><br><br><br>
+    <p style="font-size: 20px; text-align: center; color: white;"> "Stay ahead of the curve with our 'Trending Now' section! Dive into the latest buzz, hottest topics, and most talked-about trends sweeping the gaming and quiz world. From viral challenges to breaking news, find out what's capturing the attention of gamers and quiz enthusiasts alike. Don't miss out on the excitement – explore what's trending today!"</p>
+    <br><br>
+  <div class="brand-list">
+    <div class="wrapper">
+      <a href="cloud.html"><img class="img-fluid rounded shadow-lg img1"src="https://tse1.mm.bing.net/th?id=OIP.fwy3KYh3p5YExxkYdLtgtAHaEu&pid=Api&P=0&h=180" alt="..." ></a>
+
+      <a href="#"><img class="img-fluid rounded shadow-lg img1"src="https://tse1.mm.bing.net/th?id=OIP.c5zCRSTyV656a_2c59jcHwHaEo&pid=Api&P=0&h=180" alt="..."></a>
+
+      <a href="suduko.html"><img class="img-fluid rounded shadow-lg img1"src="https://tse1.mm.bing.net/th?id=OIP.zWGru9Mrq6KM0KpGZGb70QHaEo&pid=Api&P=0&h=180" alt="..."></a>
+
+      <a href="java.html"><img class="img-fluid rounded shadow-lg img1"src="https://tse1.mm.bing.net/th?id=OIP.JzWcZrQORKPv4TLGS0jRcwHaEo&pid=Api&P=0&h=180" alt="..."></a>
+
+      <a href="#"><img class="img-fluid rounded shadow-lg img1"src="https://tse4.mm.bing.net/th?id=OIP.yctoH6HIY2OuR2JT3PhTAgHaEo&pid=Api&P=0&h=180 " alt="..." ></a>
+
+      <a href="#"><img class="img-fluid rounded shadow-lg img1"src="https://tse2.mm.bing.net/th?id=OIP.pAXGUz1Qag6dSw-hhVm8pQHaEo&pid=Api&P=0&h=180" alt="..." ></a>
+
+      <a href="#"><img class="img-fluid rounded shadow-lg img1"src="https://tse3.mm.bing.net/th?id=OIP.angMDUQu_qbRtzU_ctJy9QHaE8&pid=Api&P=0&h=180" alt="..."></a>
+
+      <a href="cloud.html"><img class="img-fluid rounded shadow-lg img1"src="https://tse1.mm.bing.net/th?id=OIP.fwy3KYh3p5YExxkYdLtgtAHaEu&pid=Api&P=0&h=180" alt="" ></a>
+
+      <a href="#"><img class="img-fluid rounded shadow-lg img1"src="https://tse1.mm.bing.net/th?id=OIP.c5zCRSTyV656a_2c59jcHwHaEo&pid=Api&P=0&h=180" alt=""></a>
+
+      <a href="suduko.html"><img class="img-fluid rounded shadow-lg img1"src="https://tse1.mm.bing.net/th?id=OIP.zWGru9Mrq6KM0KpGZGb70QHaEo&pid=Api&P=0&h=180" alt=""></a>
+
+      <a href="java.html"><img class="img-fluid rounded shadow-lg img1"src="https://tse1.mm.bing.net/th?id=OIP.JzWcZrQORKPv4TLGS0jRcwHaEo&pid=Api&P=0&h=180" alt=""></a>
+
+      <a href="#"><img class="img-fluid rounded shadow-lg img1"src="https://tse4.mm.bing.net/th?id=OIP.yctoH6HIY2OuR2JT3PhTAgHaEo&pid=Api&P=0&h=180 " alt="" ></a>
+
+      <a href="#"><img class="img-fluid rounded shadow-lg img1"src="https://tse2.mm.bing.net/th?id=OIP.pAXGUz1Qag6dSw-hhVm8pQHaEo&pid=Api&P=0&h=180" alt="" ></a>
+
+      <a href="#"><img class="img-fluid rounded shadow-lg img1"src="https://tse3.mm.bing.net/th?id=OIP.angMDUQu_qbRtzU_ctJy9QHaE8&pid=Api&P=0&h=180" alt=""></a>      
+    </div>
+  </div>
+
+
+<div class="hero quizzez1">
+        <div class="heading" id="about-us">
+            <h1>About US</h1>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h2 >Welcome To Our Website </h2>
+                <br>
+                <p >We're passionate about gaming and creating an immersive experience for players of all levels. Whether you're a casual gamer looking for some fun or a hardcore enthusiast seeking a challenge, our platform offers something for everyone.</p>
+                  <button class="cta-button "><a href="learn_more.html" class="text-white">Learn More</a></button>  
+            </div>
+            <div class="hero-image" >
+                <img src="effective-business-team-office-group-work-vector-34356039 (1).jpg" alt="">
+            </div>
+            </div>
+            </div>
+
+
+            <div class="slider">
+
+              <div class="item" style="text-align: center;">
+                <img src="shashi.jpeg" alt="">
+                <br>
+                <h1 >Shreyashi Singh</h1>
+                  <p >Web designer</p>
+                  <br>
+                  <p >Student at Chitkara University</p>
+                  <br>
+                  <p>Contact: </p>
+                  <br>
+                  <div class="Contact">
+                    <i class="fa-brands fa-facebook c1"></i>
+                    <i class="fa-brands fa-whatsapp c1"></i>
+                    <i class="fa-brands fa-square-x-twitter c1"></i>
+                    <i class="fa-brands fa-instagram c1"></i>
+                  </div>
+              </div>
+              <div class="item" style="text-align: center;">
+                <img src="seth3.jpg" alt="">
+                <br>
+                  <h1 >Shriya Seth</h1>
+                    <p >Web designer</p>
+                    <br>
+                    <p >Student at Chitkara University</p>
+                    <br>
+                    <p>Contact: </p>
+                    <br>
+                    <div class="Contact">
+                      <i class="fa-brands fa-facebook c1"></i>
+                      <i class="fa-brands fa-whatsapp c1"></i>
+                      <i class="fa-brands fa-square-x-twitter c1"></i>
+                      <i class="fa-brands fa-instagram c1"></i>
+                    </div>
+                </div>
+              
+              
+              <button id="next">></button>
+              <button id="prev"><</button>
+          </div>
+        </section>
+       
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about-us">About Us</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+      </div>
+      <br><br>
+      <p>Get connected with us on social networks:</p>
+      <div class="social-icons">
+        <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <br>
+    <p>&copy; 2024 Trivia Game . All rights reserved.</p>
+  </footer>
+  
+  </body>
+  <script src="/script.js"></script>
+  <script>
+
+function navigate() {
+        var selectedOption = document.getElementById("Search").value;
+        window.location.href = selectedOption;
+    }
+    
+    
+    let items = document.querySelectorAll('.slider .item');
+    let next = document.getElementById('next');
+    let prev = document.getElementById('prev');
+    
+    let active = 0;
+    function loadShow(){
+        let stt = 0;
+        items[active].style.transform = `none`;
+        items[active].style.zIndex = 1;
+        items[active].style.filter = 'none';
+        items[active].style.opacity = 1;
+        for(var i = active + 1; i < items.length; i++){
+            stt++;
+            items[i].style.transform = `translateX(${120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)`;
+            items[i].style.zIndex = -stt;
+            items[i].style.filter = 'blur(5px)';
+            items[i].style.opacity = stt > 2 ? 0 : 0.6;
+        }
+        stt = 0;
+        for(var i = active - 1; i >= 0; i--){
+            stt++;
+            items[i].style.transform = `translateX(${-120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(1deg)`;
+            items[i].style.zIndex = -stt;
+            items[i].style.filter = 'blur(5px)';
+            items[i].style.opacity = stt > 2 ? 0 : 0.6;
+        }
+    }
+    loadShow();
+    next.onclick = function(){
+        active = active + 1 < items.length ? active + 1 : active;
+        loadShow();
+    }
+    prev.onclick = function(){
+        active = active - 1 >= 0 ? active - 1 : active;
+        loadShow();
+    }
+    
+    
+    </script>
+   
+  </html>
+
