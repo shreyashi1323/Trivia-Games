@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the word</title>
+<style>
+    h1 { 
+    background-color:rgb(137, 90, 4); 
+    color:black; 
+    font-size: xx-large; 
+    padding: 2%; 
+    /* width: 70vh; */
+} 
+.card { 
+    background-color:rgb(137, 90, 4);
+    min-width: 30%; 
+    width: 50vh; 
+    min-height: 30vh; 
+    box-shadow: 0 4px 8px 0 rgba(1, 1, 1, 0.2); 
+    transition: 0.3s; 
+    border-radius: 5px; 
+    margin: auto; 
+    padding: 2%; 
+    text-align: center;
+   
+} 
+  
+body { 
+    display: flex; 
+    justify-content: center; /* horizontally center the content */
+    align-items: center; /* vertically center the content */
+    height: 100vh; /* make sure body covers the entire viewport */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+    margin: 0; /* remove default margin */
+    overflow: hidden;  
+} 
+  
+input { 
+    width: 30px; 
+    padding: 1%; 
+    font-size: larger; 
+    text-align: center; 
+    margin-left: 2%; 
+} 
+  
+#displayWord { 
+    font-size: xx-large; 
+}
+
+#videoslider {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+button{
+    font-size: 20px;
+    color: black;
+    background-color: rgb(169, 131, 82);
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+</style>
+</head> 
+  
+<body> 
+    <video src="131782 (540p).mp4" id="videoslider" loop autoplay muted></video>
+
+    <div class="main">
+    <div class="card"> 
+        <h1>Guess the word</h1> 
+        <p> 
+              <b>Hint:</b> Animal name
+          </p> 
+        <p id="displayWord"></p> 
+        <p>Guess one letter: 
+  
+            <input type="text" 
+                   maxlength="1" 
+                   id="letter-input"> 
+        </p> 
+        <button onclick="guessLetter()"> 
+              Submit 
+          </button> 
+    </div> 
+</div>
+</body> 
+<script>
+    const words = [ 
+    "dog", 
+    "lion", 
+    "cat", 
+    "peacock", 
+    "snake", 
+    "tiger", 
+    "wolf", 
+    "elephant", 
+]; 
+  
+// Geting random word from the list 
+let randomIndex = Math.floor(Math.random() * words.length); 
+let selectedWord = words[randomIndex]; 
+console.log(selectedWord); 
+  
+// To store the already guessed letters 
+let guessedlist = []; 
+  
+// For initial display Word 
+let displayWord = ""; 
+for (let i = 0; i < selectedWord.length; i++) { 
+    displayWord += "_ "; 
+} 
+document.getElementById("displayWord").textContent = displayWord; 
+  
+// Function to check Guessed letter 
+function guessLetter() { 
+    let inputElement =  
+        document.getElementById("letter-input"); 
+  
+    // To check empty input 
+    if (!inputElement.value) { 
+        alert("Empty Input box. Please add input letter"); 
+        return; 
+    } 
+  
+    let letter = inputElement.value.toLowerCase(); 
+  
+    // Clear the input field 
+    inputElement.value = ""; 
+  
+    // Check if the letter has already been guessed 
+    if (guessedlist.includes(letter)) { 
+        alert("You have already guessed that letter!"); 
+        return; 
+    } 
+  
+    // Add the letter to the guessed letters array 
+    guessedlist.push(letter); 
+  
+    // Update the word display based on the guessed letters 
+    let updatedDisplay = ""; 
+    let allLettersGuessed = true; 
+    for (let i = 0; i < selectedWord.length; i++) { 
+        if (guessedlist.includes(selectedWord[i])) { 
+            updatedDisplay += selectedWord[i] + " "; 
+        } else { 
+            updatedDisplay += "_ "; 
+            allLettersGuessed = false; 
+        } 
+    } 
+    document.getElementById("displayWord") 
+        .textContent = updatedDisplay; 
+  
+    // Check if all letters have been guessed 
+    if (allLettersGuessed) { 
+        alert("Congratulations! You guessed the word correctly!"); 
+    } 
+}
+</script>
+  
+</html>

@@ -1,0 +1,35 @@
+
+.container{
+   position: relative;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+}
+.bubbles{
+    position: fixed;
+    display: flex;
+}
+.bubbles span{
+    position: relative;
+    width: 50px;
+    height: 50px;
+    
+    /* margin: 0 4px; */
+    border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.7);
+    animation: animate 15s linear infinite;
+    animation-duration: calc(150s/var(--i));
+}
+.bubbles span:nth-child(even){
+    border: 4px solid rgba(255,255,255,0.7);
+}
+@keyframes animate{
+    0%{
+        transform: translateY(100vh) scale(0);
+
+    }
+    100%{
+        transform: translateY(-100vh) scale(1);
+
+    }
+}

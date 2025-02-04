@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap');
+        :root{
+        --orange:#ffa500
+    }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Protest Riot", sans-serif;
+        }
+        #videoslider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            filter: blur(0.3rem);
+            z-index: -1; /* Ensure the video stays behind other content */
+        }
+        .main-content {
+            font-family: "Protest Riot", sans-serif;
+            padding: 30px;
+            position: relative; /* Change to relative */
+            z-index: 1; /* Ensure content stays above the video */
+            color: rgb(17, 14, 14); /* Set text color to white for better visibility */
+            font-size: 25px;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+            color: rgb(94, 42, 5);
+        }
+        a{
+            color: rgb(8, 7, 7);
+            text-decoration: none;
+            
+        }
+        select
+    {
+        border: 2px;
+        border-radius: 5px;
+        height: 30px;
+        color: black;
+        background-color: white;
+    }
+    .login-btn
+    {
+        height: 30px;
+        width: 60px;
+       
+        font-size: 17px;
+        cursor: pointer;
+        background:none;
+    }
+    *::selection{
+        background: var(--orange);
+        color: #fff;
+
+    }
+    html{
+        font-size: 62.5%;
+        overflow-x:hidden;
+        scroll-padding-top: 6rem;
+        scroll-behavior: smooth;
+    }
+    .btn{
+        display: inline-block;
+        margin-top: 1rem;
+        background: var(--orange);
+        color: #fff;
+        padding: 8rem 3 rem;
+        border: 2rem solid var(--orange);
+        cursor: pointer;
+        font-size: 1.7rem;
+        border-radius: 5px;
+    }
+    .btn:hover{
+        transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+      color: rgb(52, 50, 50);
+    }
+    header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-image: linear-gradient(to right bottom, #ffd6cd, #f1baac, #e19f8c, #d0856c, #be6b4d, #bd6546, #bb5e3f, #ba5838, #cb6347, #dd6d57, #ee7967, #ff8478);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        header .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            /* color: #fff; */
+            text-transform: uppercase;
+        }
+
+        header .logo span {
+            color: var(--orange); /* Assuming you have a variable for orange color */
+        }
+
+        header .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        header .navbar a {
+            color: #fff;
+        font-size: 2rem;
+        margin: 0.8rem;
+        }
+
+        header .navbar a:hover {
+            color: var(--orange); /* Assuming you have a variable for orange color */
+        }
+
+        header .login-btn {
+            
+            font-size: 1.6rem;
+            cursor: pointer;
+            font-family: "Protest Riot", sans-serif;
+            color: #fff;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto; /* Move the login button to the right */
+        }
+
+    header .icons i{
+        font-size: 2.5rem;
+        color:#fff;
+        cursor: pointer;
+        margin-right: 2rem;
+    }
+    header .icons i:hover{
+        color: var(--orange);
+    }
+    header .search-bar-container{
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        padding: 1.5rem 2rem;
+        background: #333;
+        border-top: .1rem solid rgba(255, 255, 255, .2);
+        display: flex;
+        align-items: center;
+        z-index: 1001;
+        clip-path:polygon(0 0,100% 0,100% 0, 0 0) ;
+    }
+    header .search-bar-container #search-bar{
+        width: 100%;
+        padding: 1rem;
+        text-transform: none;
+        color: #333;
+        font-size: 1.7rem;
+        border-radius: .5rem;
+    }
+    header .search-bar-container label{
+        color: #fff;
+        cursor: pointer;
+        font-size: 3rem;
+        margin-left: 1.5rem;
+    }
+    header .search-bar-container label:hover{
+        color:var(--orange) ;
+    }
+    .login-form-container{
+        position: fixed;
+        top: -120%; left:0;
+        z-index: 10000;
+        min-height: 100vh;
+        width: 100%;
+        background: rgba(0,0 , 0, .7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .login-form-container form{
+        margin: 2rem;
+        padding: 1.5rem 2rem;
+        border-radius: .5rem;
+        background:#fff ;
+        width: 50rem;
+    }
+    .login-form-container form h3{
+        font-size: 3rem;
+        color: #444;
+        text-transform:uppercase ;
+        text-align: center;
+        padding: 1rem 0;
+
+    }
+    .login-form-container form .box{
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.7rem;
+        color: #333;
+        margin: 6rem 0;
+        border: 1rem solid rgba(0,0 , 0, .3);
+        text-decoration: none;
+    }
+    .login-form-container form .box:focus{
+        border-color: var(--orange);
+    }
+    .login-form-container form #remember{
+        margin: 2rem 0;
+    }
+    .login-form-container form label{
+        font-size: 1.5rem;
+    }
+    .login-form-container form.btn{
+        display: block;
+        width:100% ;
+    }
+    .login-form-container form p{
+        padding: 5rem 0;
+        font-size: 1.5rem;
+        
+    }
+    .login-form-container form p a{
+        color: var(--orange);
+    }
+    .login-form-container form p a:hover{
+        
+        text-decoration: underline;
+    }
+    .login-form-container #form-close{
+        position: absolute;
+        top: 2rem; right: 3rem;
+    }
+    .login-form-container.active{
+        top: 0;
+    }
+
+#menu-bar{
+    color: #fff;
+    border: 1rem solid #fff;
+    border-radius: .5rem;
+    font-size: 3rem;
+    padding: 5rem 1.2rem;
+    cursor: pointer;
+    display: none;
+   
+}
+nav
+{
+    display: flex;
+    column-gap: 20px;
+}
+
+/* media queries */
+@media(max-width:1200px){
+    html{
+        font-size: 55%;
+    
+    }
+}
+@media(max-width:991px){
+   header{
+    padding:2rem ;
+   }
+}
+@media(max-width:768px){
+   #menu-bar{
+    display:initial ;
+   }
+   header .navbar{
+    position: absolute;
+    top:100%; right: 0; left: 0;
+    background: #333;
+    border-top: .1rem solid rgba(255, 255, 255, .2);
+    padding: 1rem 2rem;
+    clip-path: polygon(0 0,100% 0,0 0);
+   }
+   header .navbar.active{
+    clip-path: polygon(0 0,100% 0,0 0);
+   }
+
+   header .navbar a{
+   display: block;
+   border-radius: 5rem;
+   padding-left: 1.5rem;
+   margin: 1.5rem 0;
+   background: #222;
+
+}
+}
+@media(max-width:450px){
+    html{
+        font-size: 50%;
+    
+    }
+}
+.home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+    flex-flow: column;
+    position: relative;
+    z-index: 0;
+}
+section{
+    padding: 5rem;
+}
+
+.home .content{
+    text-align:center;
+    z-index: 1000;
+}
+.home .content h3{
+   font-size: 4.5rem;
+   color: #fff;
+   text-transform: uppercase;
+   text-shadow: 0 .3rem .5rem rgba(0,0,0,.1);
+}
+
+.home .content p{
+   font-size: 2.5rem;
+   color: #fff;
+   padding: 5rem 0;
+}
+.home .video-container video{
+    position: absolute;
+    top:0 ; left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.home .controls {
+    padding: 1rem;
+    border-radius: 5rem;
+    background-color: rgba(0,0,0,.7);
+    position: relative;
+    top: 10rem;
+}
+
+.home .controls .vid-btn{
+    height: 2rem;
+    width: 2rem;
+    display: inline-block;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    margin: 0 .5rem;
+}
+.home .controls .vid-btn.active{
+    background: var(--orange);
+}
+#navid
+   {
+    font-family: "Protest Riot", sans-serif;
+    background-color:rgba(2, 2, 42, 0.377);
+    padding: 10px;
+   }
+
+#logo
+{
+  font-size: large;
+  text-decoration: none;
+}
+#Search
+{
+  border-radius: 10px;
+  width: 20em;
+  height: 40px;
+  color: black;
+  text-align: center;
+  
+}
+#login
+{
+  width: 5em;
+  height: 40px;
+  cursor: pointer;
+}
+.navigation
+{
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.logo
+{
+  font-size: xx-large;
+  cursor: pointer;
+  font-family: "Protest Riot", sans-serif;
+  color: white;
+
+}
+h2{
+  font-family: "Protest Riot", sans-serif;
+  text-align: center;
+}
+
+.search
+{
+  border-radius: 10px ;
+  background-color:  black;
+  box-shadow: 1px 1px 1px 1px rgb(45, 44, 44);
+  border: 1px solid black;
+  width: 30vw;
+  color: white;
+  font-family: "Protest Riot", sans-serif;
+  text-align: center;
+}
+.login
+{
+  
+  width: 10vw;
+  font-size: large;
+  font-weight: 600;
+  background-color:  black;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgb(45, 44, 44);
+  
+  font-family: "Protest Riot", sans-serif;
+
+}
+.login:hover , .search:hover{
+  transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+}
+
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <a href="Home.html" class="logo">Trivia Game</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <nav class="navbar" >
+            <a href="index.html">Home</a>
+            <a href="index.html">Quizzes</a>
+            <a href="index.html">Games</a>
+            <a href="index.html">Trending</a>
+            <a href="spinwheel.html">Play Random</a>
+            <a href="index.html">About Us</a>
+
+            <button class="login-btn" style="margin-top: 5px;"><a href="login.html">Login</a></button>
+
+            <select id="Search" class="search" style="color: white; background-color: rgb(113, 44, 4);" onchange="navigate()" >
+              <option value="index.html">Home</option>
+              <option value="suduko.html">Suduko</option>
+              <option value="blockchain.html">Blockchain</option>
+              <option value="guess the word.html">Guess the Word</option>
+              <option value="cloud.html">Cloud Computing</option>
+              <option value="tictactoe.html">Tic Tac Toe</option>
+              <option value="Java.html">Java</option>
+              <!-- Add more options as needed -->
+          </select>
+            
+        </nav>
+        
+    </header>
+<video src="boy_-_57753 (1080p).mp4" id="videoslider" loop autoplay muted></video>
+<section>
+    <div class="bubbles">
+      <span style="--i:11"></span>
+      <span style="--i:12"></span>
+      <span style="--i:24"></span>
+      <span style="--i:10"></span>
+      <span style="--i:14"></span>
+      <span style="--i:23"></span>
+      <span style="--i:18"></span>
+      <span style="--i:16"></span>
+      <span style="--i:19"></span>
+      <span style="--i:20"></span>
+      <span style="--i:22"></span>
+      <span style="--i:25"></span>
+      <span style="--i:18"></span>
+      <span style="--i:21"></span>
+      <span style="--i:15"></span>
+      <span style="--i:13"></span>
+      <span style="--i:26"></span>
+      <span style="--i:17"></span>
+      <span style="--i:13"></span>
+      <span style="--i:28"></span>
+      <span style="--i:28"></span>
+      <span style="--i:11"></span>
+      <span style="--i:12"></span>
+      <span style="--i:24"></span>
+      <span style="--i:10"></span>
+      <span style="--i:14"></span>
+      <span style="--i:23"></span>
+      <span style="--i:18"></span>
+      <span style="--i:16"></span>
+      <span style="--i:19"></span>
+      <span style="--i:20"></span>
+      <span style="--i:22"></span>
+      <span style="--i:25"></span>
+      <span style="--i:18"></span>
+      <span style="--i:21"></span>
+      <span style="--i:15"></span>
+      <span style="--i:13"></span>
+      <span style="--i:26"></span>
+      <span style="--i:17"></span>
+      <span style="--i:13"></span>
+      <span style="--i:28"></span>
+      <span style="--i:12"></span>
+      
+    </div>
+
+<div class="main-content">
+    <h2>ABOUT US</h2>
+    <br><br>
+    <h4>Welcome to Trivia Game!</h4>
+    <br><br>
+
+    Here, we're passionate about trivia and creating memorable experiences for players of all ages. Our journey began with a simple idea: to bring people together through the joy of knowledge and friendly competition.
+    <br><br>
+    <h5>Who We Are:</h5>
+
+    We are a team of trivia enthusiasts, game developers, and creatives dedicated to crafting an engaging and entertaining trivia experience. With a diverse background in technology, design, and entertainment, we've pooled our talents to build a platform that offers endless hours of fun and learning.
+    <br><br>
+    <h5>Our Mission:</h5>
+
+    Our mission is to ignite curiosity, spark conversations, and foster connections through the power of trivia. We believe that learning should be enjoyable and accessible to everyone, whether you're a seasoned trivia buff or just dipping your toes into the world of facts and figures.
+    <br><br>
+
+    <h5>Curated Content:</h5>
+    Our trivia questions are meticulously researched and handpicked to cover a wide range of topics, ensuring there's something for everyone to enjoy.
+    User-Friendly Interface: We've designed our platform to be intuitive and easy to navigate, so you can focus on having fun without any unnecessary distractions.
+    <br><br>
+    <h5>Community Engagement:</h5>
+    We value the input of our players and actively seek feedback to continuously improve and expand our game offerings.
+    Accessibility: [Your Trivia Game Name] is accessible across multiple devices, making it convenient for you to play anytime, anywhere.
+    <br><br>
+    <h5>Join Us:</h5>
+    <br><br>
+
+    Whether you're looking to test your knowledge solo, challenge your friends to a trivia showdown, or host a virtual trivia night with colleagues, [Your Trivia Game Name] has something for everyone. Join our community today and embark on a journey of discovery and entertainment!
+    <br><br>
+
+    Thank you for choosing Trivia Game - where learning meets fun!
+
+</div>
+
+</body>
+</html>

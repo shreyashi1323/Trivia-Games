@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <style>
+ 
+    body{
+    margin: 0;
+    padding: 0; 
+    text-align: center;
+    background-image: linear-gradient(to right bottom, #b8ddf9, #a3d5f4, #8dceee, #74c6e8, #56bfe0, #45b8d8, #30b2d0, #0babc8, #0aa4be, #099cb4, #0995ab, #0a8ea1);
+}
+
+h1{
+    background-color: white(3, 3, 50);
+    color: black;
+    height: 50px;
+    line-height: 50px;
+}
+
+.choice{
+    display: block;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+img{ 
+ height: 180px;}
+
+.choice:hover{
+    cursor:pointer;
+    transform: rotate(200deg);
+}
+
+#choices{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin-top:4rem;
+    gap: 3rem;
+}
+
+#score-board{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:3rem;
+    gap: 5rem;
+    font-size: 2rem;
+}
+
+#user-score,#comp-score{
+    font-size: 2rem;
+}
+
+#msg-container{
+    margin-top: 4rem;
+}
+#msg-container:hover{
+    cursor: pointer;
+}
+#msg{
+    background-color: black;
+    color: white;
+    font-size: 2rem;
+    display: inline;
+    padding: 15px;
+    border-radius: 1rem;
+}
+
+#videoslider {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+        }
+  </style>
+
+</head>
+<body>
+    <video src="131782 (540p).mp4" id="videoslider" loop autoplay muted></video>
+
+    <h1>Rock Paper Scissors</h1>
+
+    <div id="choices">
+        <div class="choice" id="rock"><img src="https://goodday451999.github.io/Rock-Paper-Scissors-Neo/images/stone.png"></div>
+        <div class="choice" id="paper"><img src="https://goodday451999.github.io/Rock-Paper-Scissors-Neo/images/paper.png"></div>
+        <div class="choice" id="scissors"><img src="https://goodday451999.github.io/Rock-Paper-Scissors-Neo/images/scissors.png"></div>
+    </div>
+
+    <div id="score-board">
+        <div class="score">
+            <p id="user-score">0</p>
+            <p>you</p>
+        </div>
+        <div class="score">
+            <p id="comp-score">0</p>
+            <p>comp</p>
+        </div>
+    </div>
+
+    <div id="msg-container">
+        <p id="msg">Play Your Move</p>
+    </div>
+    <script>
+       let userscore=0;
+let compscore=0;
+
+const choices=document.querySelectorAll(".choice");
+
+const userscorep=document.querySelector("#user-score");
+
+const compscorep=document.querySelector("#comp-score");
+
+const msg=document.querySelector("#msg");
+
+const gencompchoice=()=>{
+    const options=["rock","paper","scissors"];
+    const randIdx=Math.floor(Math.random()*3);
+    return options[randIdx];
+}
+
+const drawgame=()=>{
+    console.log("It was a draw")
+    msg.innerText="DRAW. Play Again";
+    msg.style.backgroundColor="brown";
+}
+
+const showwinner=(userwin,userchoice,compchoice)=>{
+    if(userwin)
+    {
+        userscore++;
+        console.log("you win !!");
+        msg.innerText=`You Win! Your ${userchoice} beats ${compchoice}`;
+        msg.style.backgroundColor="green";
+        userscorep.innerText=userscore;
+    }
+    else
+    {
+        compscore++;
+        console.log("You Lose:(")
+        msg.innerText=Y`ou Lose:( ${compchoice} beats Your ${userchoice}`;
+        msg.style.backgroundColor="red";
+        compscorep.innerText=compscore;
+    }
+}
+
+const playgame=(choiceid)=>{
+    console.log("user choice=",choiceid);
+    const comchoice=gencompchoice();
+    console.log("comp choice=",comchoice);
+    if(choiceid===comchoice){
+        drawgame();
+    } else
+    {
+        let userwin=true;
+        if(choiceid==="rock"){
+            userwin=comchoice==="paper"?false:true;
+        }else if(choiceid==="paper"){
+            userwin=comchoice==="scissors"? false:true;
+        } else{
+            userwin=comchoice==="rock"?false:true
+        }
+        showwinner(userwin,choiceid,comchoice);
+    }
+}
+
+choices.forEach((choice)=>{
+    choice.addEventListener("click",()=>
+    {
+        const choiceid=choice.getAttribute("id")
+        playgame(choiceid);
+    })
+})
+    </script>
+</body>
+</html>
